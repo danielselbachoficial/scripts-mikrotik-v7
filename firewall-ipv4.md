@@ -1,3 +1,5 @@
+# Script firewall IPv4 Básico - MikroTik RouterOS v7
+
 # Address-list
 
 /ip firewall address-list add address=192.168.10.0/24 list=rede-local-privada
