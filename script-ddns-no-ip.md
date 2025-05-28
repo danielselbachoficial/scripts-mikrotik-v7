@@ -1,5 +1,5 @@
 # Atualização automática do IP Público com DDNS No-IP
-> Desenvolvido por: *Gilson Telecom**.
+> Desenvolvido por: **Gilson Telecom**.
 >
 > Atualizador por: **Daniel Selbach**
 >
