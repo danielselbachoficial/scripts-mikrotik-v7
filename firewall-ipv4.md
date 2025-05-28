@@ -1,5 +1,6 @@
 # Script firewall IPv4 Básico - MikroTik RouterOS v7
 
+```bash
 # Address-list
 
 /ip firewall address-list add address=192.168.10.0/24 list=rede-local-privada
@@ -34,3 +35,4 @@
 /ip firewall raw add action=drop chain=prerouting comment="=== DROPAR ATAQUE DDoS ===" dst-port=53 in-interface=ether1 protocol=tcp
 /ip firewall raw add action=drop chain=prerouting dst-port=53 in-interface=ether1 protocol=udp
 /ip firewall raw add action=drop chain=prerouting comment="=== DROPAR ATAQUE IP-FLOOD ===" protocol=icmp
+```
