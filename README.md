@@ -1,4 +1,4 @@
-Sejam bem-vindos ao repositório com scripts para o MikroTik RouterOS v7!
+Sejam bem-vindos ao repositório com scripts para o MikroTik RouterOS v6 e v7!
 
 Me chamo Daniel Selbach, sou empreendedor, Mentor de Fortinet na Six Core, YouTuber.
 
