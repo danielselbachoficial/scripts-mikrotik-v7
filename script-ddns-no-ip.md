@@ -7,7 +7,7 @@
 >
 > YouTube - Daniel Selbach: https://www.youtube.com/@danielselbachoficial
 
-
+```bash
 # Alterar as informacoes desta secao conforme os dados do seu login e host no-ip
 :local noipuser "usuario"
 :local noippass "senha"
@@ -41,3 +41,4 @@
 } else={
    :log info "No-IP: $inetinterface desconectada. Impossivel atualizar No-IP."
 }
+```
