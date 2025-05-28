@@ -1,4 +1,4 @@
-# Atualização automática do IP Público com DDNS No-IP
+# Atualização automática do IP Público com DDNS No-IP no MikroTik RouterOS v7
 > Desenvolvido por: **Gilson Telecom**.
 >
 > Atualizador por: **Daniel Selbach**
