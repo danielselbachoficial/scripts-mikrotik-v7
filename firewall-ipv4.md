@@ -12,8 +12,8 @@
 /ip firewall filter add action=drop chain=input comment="BLOQUEAR CONEXOES INVALIDAS" connection-state=invalid
 /ip firewall filter add action=add-src-to-address-list address-list=port-scanners address-list-timeout=4w2d chain=input comment="=== PEGA MALANDRO - TCP ===" dst-port=3389,21-25 in-interface=ether1 protocol=tcp
 /ip firewall filter add action=add-src-to-address-list address-list=port-scanners address-list-timeout=4w2d chain=input comment="=== PEGA MALANDRO - UDP ===" dst-port=3389,21-25 in-interface=ether1 protocol=udp
-/ip firewall filter add action=accept chain=input comment="PERMITIR SSH" dst-port=5000 protocol=tcp
-/ip firewall filter add action=accept chain=input comment="PERMITIR WINBOX" dst-port=5100 protocol=tcp
+/ip firewall filter add action=accept chain=input comment="PERMITIR SSH" dst-port=2500 protocol=tcp
+/ip firewall filter add action=accept chain=input comment="PERMITIR WINBOX" dst-port=2600 protocol=tcp
 /ip firewall filter add action=accept chain=input comment="PERMTIR DHCP" dst-port=67,68 protocol=udp src-address-list=rede-local-privada
 /ip firewall filter add action=add-src-to-address-list address-list=port-scanners address-list-timeout=2w chain=input comment="=== PORTSCAN TCP === " in-interface=ether1 protocol=tcp psd=21,3s,3,1
 /ip firewall filter add action=add-src-to-address-list address-list=port-scanners address-list-timeout=4w2d chain=input comment="=== PORTSCAN UDP ===" in-interface=ether1 protocol=udp psd=21,3s,3,1
