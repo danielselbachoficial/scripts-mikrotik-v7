@@ -46,6 +46,111 @@ Antes de subir os scripts para o seu MikroTik, você precisa editar as informaç
 3.  Crie 4 novos scripts, um para cada arquivo deste repositório. Dê a eles nomes fáceis de identificar, como os nomes dos arquivos (`telegram-RedLink-DOWN`, etc.).
 4.  Para cada script, copie e cole o conteúdo correspondente no campo **Source**.
 
+#### Scripts
+```
+Script 1: telegram-RedLink-DOWN (com Horário) -> LINK PPPoE Client
+
+:local botToken "<SEU_BOT_TOKEN>" 
+:local chatId "-123456789"
+:local routerName "<NOME-DO-SEU-ROTEADOR-MK>"
+
+# Mensagem
+:local message ("🚨 *Alerta em " . $routerName . "*: O link <NOME-DA-INTERFACE-PPPOE-CLIENT> caiu!")
+
+# Monta a URL base 
+:local url "https://api.telegram.org/bot$botToken/sendMessage"
+
+# Monta o corpo da requisição (os dados que enviaremos)
+:local data "chat_id=$chatId&parse_mode=Markdown&text=$message"
+
+# Envia a notificação usando o método POST 
+/tool fetch url=$url http-method=post http-data=$data keep-result=no
+
+
+Script 2: telegram-RedLink-UP (com Horário) -> LINK PPPoE Client
+
+:local botToken "<SEU_BOT_TOKEN>" 
+:local chatId "-123456789"
+:local routerName "<NOME-DO-SEU-ROTEADOR-MK>"
+:local linkName "<NOME-DA-INTERFACE-PPPOE-CLIENT>"
+
+# --- Captura data e hora do evento ---
+:local eventDate [/system clock get date]
+:local eventTime [/system clock get time]
+
+# Mensagem multi-linha formatada (usando %0A para quebra de linha)
+:local message "✅ *Normalização de Link*%0A%0A"
+:set message ($message . "*Roteador:* `" . $routerName . "`%0A")
+:set message ($message . "*Link:* `" . $linkName . "`%0A")
+:set message ($message . "*Status:* RESTABELECIDO%0A")
+:set message ($message . "*Horário:* " . $eventDate . " às " . $eventTime)
+
+# Monta a URL base
+:local url "https://api.telegram.org/bot$botToken/sendMessage"
+
+# Monta o corpo da requisição
+:local data "chat_id=$chatId&parse_mode=Markdown&text=$message"
+
+# Envia a notificação usando o método POST
+/tool fetch url=$url http-method=post http-data=$data keep-result=no
+
+
+Script 3: telegram-Vivo-DOWN (com Horário) -> LINK DMZ
+
+:local botToken "<SEU_BOT_TOKEN>" 
+:local chatId "-123456789"
+:local routerName "<NOME-DO-SEU-ROTEADOR-MK>"
+:local linkName "<NOME-DA-INTERFACE-LINK-DMZ>"
+
+# --- Captura data e hora do evento ---
+:local eventDate [/system clock get date]
+:local eventTime [/system clock get time]
+
+# Mensagem multi-linha formatada (usando %0A para quebra de linha)
+:local message "🚨 *Alerta de Link de Backup*%0A%0A"
+:set message ($message . "*Roteador:* `" . $routerName . "`%0A")
+:set message ($message . "*Link:* `" . $linkName . "`%0A")
+:set message ($message . "*Status:* CAIU%0A")
+:set message ($message . "*Horário:* " . $eventDate . " às " . $eventTime)
+
+# Monta a URL base
+:local url "https://api.telegram.org/bot$botToken/sendMessage"
+
+# Monta o corpo da requisição
+:local data "chat_id=$chatId&parse_mode=Markdown&text=$message"
+
+# Envia a notificação usando o método POST
+/tool fetch url=$url http-method=post http-data=$data keep-result=no
+
+
+Script 4: telegram-Vivo-UP (com Horário) -> LINK DMZ
+
+:local botToken "<SEU_BOT_TOKEN>" 
+:local chatId "-123456789"
+:local routerName "<NOME-DO-SEU-ROTEADOR-MK>"
+:local linkName "<NOME-DA-INTERFACE-LINK-DMZ>"
+
+# --- Captura data e hora do evento ---
+:local eventDate [/system clock get date]
+:local eventTime [/system clock get time]
+
+# Mensagem multi-linha formatada (usando %0A para quebra de linha)
+:local message "✅ *Normalização de Link de Backup*%0A%0A"
+:set message ($message . "*Roteador:* `" . $routerName . "`%0A")
+:set message ($message . "*Link:* `" . $linkName . "`%0A")
+:set message ($message . "*Status:* RESTABELECIDO%0A")
+:set message ($message . "*Horário:* " . $eventDate . " às " . $eventTime)
+
+# Monta a URL base
+:local url "https://api.telegram.org/bot$botToken/sendMessage"
+
+# Monta o corpo da requisição
+:local data "chat_id=$chatId&parse_mode=Markdown&text=$message"
+
+# Envia a notificação usando o método POST
+/tool fetch url=$url http-method=post http-data=$data keep-result=no
+```
+
 ### Passo 3: Configurar o Netwatch (O Gatilho)
 
 O Netwatch será o responsável por monitorar os links e disparar os scripts. Vamos criar duas regras, uma para cada link.
@@ -70,4 +175,4 @@ O Netwatch será o responsável por monitorar os links e disparar os scripts. Va
 4.  **Aba Up:** Cole o nome do seu script de restabelecimento: `telegram-Vivo-UP`
 5.  Clique em **OK**.
 
-Pronto! Seu sistema de monitoramento está ativo. Ao desconectar um dos cabos ou quando um dos links falhar, o Netwatch detectará a falha e executará o script correspondente, enviando o alerta para seu Telegram.
+Pronto! Seu sistema de monitoramento via Telegram está ativo. Ao desconectar um dos cabos ou quando um dos links falhar, o Netwatch detectará a falha e executará o script correspondente, enviando o alerta para seu Telegram.
