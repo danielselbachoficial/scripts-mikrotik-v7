@@ -1,4 +1,4 @@
-# Script firewall IPv4 Básico - MikroTik RouterOS v7
+# Script firewall IPv4 - MikroTik RouterOS v7
 
 ```bash
 # 2025-08-04 22:47:57 by RouterOS 7.19.3
