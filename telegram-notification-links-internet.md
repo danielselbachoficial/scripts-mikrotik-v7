@@ -43,12 +43,12 @@ Antes de subir os scripts para o seu MikroTik, você precisa editar as informaç
 
 1.  Acesse seu MikroTik (via WinBox ou WebFig).
 2.  Navegue até **System > Scripts**.
-3.  Crie 4 novos scripts, um para cada arquivo deste repositório. Dê a eles nomes fáceis de identificar, como os nomes dos arquivos (`telegram-RedLink-DOWN`, etc.).
+3.  Crie 4 novos scripts, um para cada arquivo deste repositório. Dê a eles nomes fáceis de identificar, como os nomes dos arquivos (`telegram-ALGAR-DOWN`, etc.).
 4.  Para cada script, copie e cole o conteúdo correspondente no campo **Source**.
 
 #### Scripts
 ```
-#### Script 1: telegram-RedLink-DOWN (com Horário) -> LINK PPPoE Client #### 
+#### Script 1: telegram-ALGAR-DOWN (com Horário) -> LINK PPPoE Client #### 
 
 :local botToken "<SEU_BOT_TOKEN>" 
 :local chatId "-123456789"
@@ -67,7 +67,7 @@ Antes de subir os scripts para o seu MikroTik, você precisa editar as informaç
 /tool fetch url=$url http-method=post http-data=$data keep-result=no
 
 
-#### Script 2: telegram-RedLink-UP (com Horário) -> LINK PPPoE Client ####
+#### Script 2: telegram-ALGAR-UP (com Horário) -> LINK PPPoE Client ####
 
 :local botToken "<SEU_BOT_TOKEN>" 
 :local chatId "-123456789"
@@ -151,18 +151,18 @@ Antes de subir os scripts para o seu MikroTik, você precisa editar as informaç
 /tool fetch url=$url http-method=post http-data=$data keep-result=no
 ```
 
-### Passo 3: Configurar o Netwatch (O Gatilho)
+### Passo 3: Configurar o Netwatch
 
 O Netwatch será o responsável por monitorar os links e disparar os scripts. Vamos criar duas regras, uma para cada link.
 
-#### Monitorando o Link Principal (RedLink - PPPoE)
+#### Monitorando o Link Principal (ALGAR - PPPoE)
 
 1.  Vá para **Tools > Netwatch** e clique no `+`.
 2.  **Aba Host:**
     * **Host:** `8.8.8.8` (ou um IP confiável que você saiba que só é acessível pelo link principal).
     * **Interval:** `00:00:10` (a cada 10 segundos).
-3.  **Aba Down:** Cole o nome do seu script de queda: `telegram-RedLink-DOWN`
-4.  **Aba Up:** Cole o nome do seu script de restabelecimento: `telegram-RedLink-UP`
+3.  **Aba Down:** Cole o nome do seu script de queda: `telegram-ALGAR-DOWN`
+4.  **Aba Up:** Cole o nome do seu script de restabelecimento: `telegram-ALGAR-UP`
 5.  Clique em **OK**.
 
 #### Monitorando o Link de Backup (Vivo - Ethernet)
